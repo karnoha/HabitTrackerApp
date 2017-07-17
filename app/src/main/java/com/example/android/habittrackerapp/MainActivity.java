@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity", "New row ID: " + newRowId);
     }
 
-    private void displayDatabaseInfo() {
+    private Cursor queryDb(){
         mDbHelper = new HabitDbHelper(this);
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
         };
 
         Cursor cursor = db.query(HabitEntry.TABLE_NAME, projection, null, null, null, null, null);
+        return cursor;
+    }
+
+    private void displayDatabaseInfo() {
+        Cursor cursor = queryDb();
 
         TextView displayView = (TextView) findViewById(R.id.textView);
 
